@@ -41,12 +41,12 @@
       <div class="portfolio-description" id="portfolio-description">
         <h2>This is an example of portfolio detail</h2>
         <p>
-          <select id="selectIndicator">
+          <select id="selectIndicator" class="form-control">
             {% for indicator in indicator_list %}
               <option value="{{indicator.indicator}}">{{indicator.indicator_nm}}</option>
             {% endfor %}
           </select>
-          <select id="selectYear">
+          <select id="selectYear" class="form-control">
             <option value="">선택해주세요</option>
             <option value="2008">2008</option>
           </select>
@@ -146,7 +146,12 @@
             var parameter = {'indicator' : $(this).val()}
             callFunc('/ajaxtest/', parameter, function(status, data){
                 if(status == 'success'){
-                    console.log(data);
+                    var deptlist = data.result;
+                    var datas = [];
+                    for (var i = 0; i < deptlist.length; i++) {
+                        datas.push(deptlist[i].dept_nm);
+                        alert(deptlist[i].dept_nm);
+                    }
                 } else {
                     alert('데이터 가져오기 실패');
                     returnData = null;	
