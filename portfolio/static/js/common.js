@@ -8,29 +8,32 @@ var makeChart = {
         var ctx = document.getElementById(ele).getContext('2d');
         
         new Chart(ctx, {
-            type: chart,
-            data: data
-            , options: {
-                responsive: true,
-                legend: {
-                  position: 'top',
-                  fullWidth: true
+          type: chart,
+          data: data,
+          options: {
+            indexAxis: "y", 
+            responsive: true,
+            legend: {
+              position: "top",
+              fullWidth: true,
+            },
+            title: {
+              display: chartTitleTF, //true, false
+              text: chartTitle, //제목
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    //min : 0
+                    //max : 20
+                    beginAtZero: true,
+                    fontSize: 14,
+                  },
                 },
-                title: {
-                  display: chartTitleTF, //true, false
-                  text: chartTitle //제목
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            //min : 0
-                            //max : 20
-                            beginAtZero: true,
-                            fontSize : 14,
-                        }
-                    }]
-                }
-            }
+              ],
+            },
+          },
         });
     }
 }

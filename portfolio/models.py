@@ -10,3 +10,14 @@ class Dept(models.Model) :
 
     class Meta:
         db_table = 'tb_dept'
+
+class Indicator(models.Model) :
+    indicator = models.CharField(primary_key=True, max_length=50)
+    parent_indicator = models.CharField(max_length=50)
+    indicator_nm = models.CharField(max_length=100)
+    indicator_val = models.CharField(max_length=30)
+    indicator_etc = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 't_indicator'
+        
