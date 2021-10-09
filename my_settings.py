@@ -11,10 +11,10 @@ DATABASES = {
     #}
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'SCTC_BMS_DB',
-        'USER': 'sctc',                      
-        'PASSWORD': 'sctcbms1!',
-        'HOST': 'localhost',
+        'NAME': 'team5_db',
+        'USER': 'team5',                      
+        'PASSWORD': 'team5',
+        'HOST': '163.152.216.248',
         'PORT': '3306',
     }
 }
