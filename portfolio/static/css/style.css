@@ -1846,3 +1846,22 @@ transition: 0.3s;
   padding-top: 4px;
 }
 }
+
+.portfolio-details #portfolio-flters li {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1;
+  color: #444444;
+  transition: all 0.3s;
+  padding: 8px 20px;
+  font-family: "SpoqaHanSansNeo-Medium", sans-serif;
+  width: 48%;
+  text-align: center;
+  }
+
+  .portfolio-details #portfolio-flters li:hover, .portfolio-details #portfolio-flters li.filter-active {
+    background: #47b2e4;
+    color: #fff; 
+  }

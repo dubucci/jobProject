@@ -20,5 +20,5 @@ from django.urls import include
 urlpatterns = [
     path('', include('portfolio.urls')), 
     path('admin/', admin.site.urls),
-    path('map/', include('d3_korea_map.urls'))
+    #path('map/', include('d3_korea_map.urls'))
 ]
