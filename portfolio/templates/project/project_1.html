@@ -36,6 +36,15 @@
   {% endfor %} -->
   <script>
     $(document).ready(function(){
+        callFuncView('/tab_view/', {'num' : '0'}, function(status, data){
+              if(status == 'success'){
+                  $('#serviceArea').html(data);
+              } else {
+                  alert('데이터 가져오기 실패');
+                  returnData = null;	
+              }
+        });
+
         $('#portfolio-flters > li').on('click', function(){
           $('#portfolio-flters > li').each(function(){
             $(this).removeClass('filter-active');
