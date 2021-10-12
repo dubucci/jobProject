@@ -1,30 +1,6 @@
 <div class="row gy-4">
     <div class="col-lg-6">
       <div class="portfolio-details-slider swiper-container">
-        <canvas id="mychart"></canvas>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="portfolio-info">
-        <h3 id="zzzz">탭투다</h3>
-        <ul>
-          <!--<li><strong>Category</strong>: Web design</li>-->
-          <!--<li><strong>Client</strong>: ASU Company</li>-->
-          <!--<li><strong>Project date</strong>: 01 March, 2020</li>-->
-          <!--<li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>-->
-        </ul>
-      </div>
-      <div class="portfolio-description" id="portfolio-description">
-        <h2>This is an example of portfolio detail</h2>
-        <p>
-          Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-        </p>
-      </div>
-    </div>
-</div>
-<div class="row gy-4">
-    <div class="col-lg-6">
-      <div class="portfolio-details-slider swiper-container">
         <canvas id="mychart2"></canvas>
       </div>
     </div>
@@ -57,45 +33,7 @@
 
   <script>
     $(document).ready(function(){
-      var color = ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'];
-          var data = {
-                  labels: ['빨간색','파란색','초록색'],
-                  datasets: [{
-                      label: '색상',
-                      backgroundColor: color,
-                      //borderColor: 'rgb(255, 99, 132)',
-                      data: [2 ,10, 5,]
-                  }]
-              };
-  
-          makeChart.make('mychart', 'bar', data, '제목이다', true); 
-  
-          $('#zzzz').on('click', function(){
-                callFunc('/ajaxtest/', '', function(status, data){
-                if(status == 'success'){
-                    console.log(data);
-                } else {
-                    alert('데이터 가져오기 실패');
-                    returnData = null;	
-                }
-            }, false);
-          })
-  
-    })
-
-    $(document).ready(function(){
-      var color = ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)'];
-          var data = {
-                  labels: ['빨간색','파란색','초록색'],
-                  datasets: [{
-                      label: '색상',
-                      backgroundColor: color,
-                      //borderColor: 'rgb(255, 99, 132)',
-                      data: [2 ,10, 5,]
-                  }]
-              };
-              
-              data = {
+      var data = {
                         labels: ['1월','1월','1월','1월','1월','1월','1월'],
                         datasets: [{
                           axis: 'y',
