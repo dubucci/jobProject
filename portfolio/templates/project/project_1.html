@@ -1,68 +1,64 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main id="main">
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>일자리 질 지수</li>
+      </ol>
+      <h2>일자리 질 지수</h2>
+    </div>
+  </section>
+  <!-- End Breadcrumbs -->
 
-{% block content %}
-  <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
-
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li>일자리 질 지수</li>
-        </ol>
-        <h2>일자리 질 지수</h2>
-
-      </div>
-    </section><!-- End Breadcrumbs -->
-
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
-      <ul id="portfolio-flters" class="d-flex justify-content-center aos-init aos-animate">
-        <li class="filter-active">지역별 일자리 질 지수</li>
-        <li>산업별 일자리 질 지수</li>
-      </ul>
-      <hr>
-      <div class="container" id="serviceArea">
-        
-      </div>
-    </section><!-- End Portfolio Details Section -->
-
-  </main><!-- End #main -->
+  <!-- ======= Portfolio Details Section ======= -->
+  <section id="portfolio-details" class="portfolio-details">
+    <ul
+      id="portfolio-flters"
+      class="d-flex justify-content-center aos-init aos-animate"
+    >
+      <li class="filter-active">지역별 일자리 질 지수</li>
+      <li>산업별 일자리 질 지수</li>
+    </ul>
+    <hr />
+    <div class="container" id="serviceArea"></div>
+  </section>
+  <!-- End Portfolio Details Section -->
+</main>
+<!-- End #main -->
 <!-- 
   {% for dept in dept_list %}
     {{dept.dept_nm}}
   {% endfor %} -->
-  <script>
-    $(document).ready(function(){
-        callFuncView('/tab_view/', {'num' : '0'}, function(status, data){
-              if(status == 'success'){
-                  $('#serviceArea').html(data);
-              } else {
-                  alert('데이터 가져오기 실패');
-                  returnData = null;	
-              }
-        });
+<script>
+  $(document).ready(function () {
+    callFuncView("/tab_view/", { num: "0" }, function (status, data) {
+      if (status == "success") {
+        $("#serviceArea").html(data);
+      } else {
+        alert("데이터 가져오기 실패?");
+        returnData = null;
+      }
+    });
 
-        $('#portfolio-flters > li').on('click', function(){
-          $('#portfolio-flters > li').each(function(){
-            $(this).removeClass('filter-active');
-          })
-          var li_idx = $(this).index();
-          $('#portfolio-flters').children().eq(li_idx).addClass('filter-active');
+    $("#portfolio-flters > li").on("click", function () {
+      $("#portfolio-flters > li").each(function () {
+        $(this).removeClass("filter-active");
+      });
+      var li_idx = $(this).index();
+      $("#portfolio-flters").children().eq(li_idx).addClass("filter-active");
 
-          var parameter = {'num' : li_idx};
-          callFuncView('/tab_view/', parameter, function(status, data){
-              if(status == 'success'){
-                  $('#serviceArea').html(data);
-              } else {
-                  alert('데이터 가져오기 실패');
-                  returnData = null;	
-              }
-          });
-
-        })
-    })
-  </script>
-  {% endblock %}
+      var parameter = { num: li_idx };
+      callFuncView("/tab_view/", parameter, function (status, data) {
+        if (status == "success") {
+          $("#serviceArea").html(data);
+        } else {
+          alert("데이터 가져오기 실패");
+          returnData = null;
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

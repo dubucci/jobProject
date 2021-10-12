@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Dept
-from .models import Indicator
+from .models import TbDept, TUnityIndicator
 
 # Create your views here.
 def main(request):
@@ -10,7 +9,7 @@ def main(request):
 
 def project_1(request):
 
-    dept_list = Dept.objects.all()
+    dept_list = TbDept.objects.all()
 
     return render(request, 'project/project_1.html', {'dept_list' : dept_list})
 
@@ -21,14 +20,15 @@ def tab_view(request):
         returnPage = 'project/project_1_tab1.html'
     else :
         returnPage = 'project/project_1_tab2.html'
-    indicator_list = Indicator.objects.all()
+    # indicator_list = Indicator.objects.all()
+    test_list = TUnityIndicator.objects.all()
 
-    return render(request, returnPage, {'indicator_list' : indicator_list})
+    return render(request, returnPage, {'test_list' : test_list})
 
 def ajaxtest(request):
     #text = request.GET['text']
 
-    dept_list = Dept.objects.all()
+    dept_list = TbDept.objects.all()
     dept_list = list(dept_list.values())
 
     resultJson = {'result' : dept_list}
