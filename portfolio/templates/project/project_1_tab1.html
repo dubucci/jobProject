@@ -15,23 +15,55 @@
       </ul>
     </div>
     <div class="portfolio-description" id="portfolio-description">
-      <!-- {% for objects in test_list %}
-      <h2>{{objects.year}}</h2>
-      {% endfor %} -->
+      <h2>This is an example of portfolio detail</h2>
       <p>
         <select id="selectIndicator" class="form-control">
           {% for indicator in indicator_list %}
           <option value="{{indicator.indicator_nm}}">
             <log class="console">{{indicator.indicator_nm}}</log>
-            {{indicator.indicator_nm}}
           </option>
           {% endfor %}
         </select>
-        <!-- <select id="selectYear" class="form-control">
-          {% for objects in test_list %}
+        <select id="selectYear" class="form-control">
+          {% for objects in unityindicator_list %}
           <option value="{objects.year}}">{{objects.year}}</option>
           {% endfor %}
-        </select> -->
+        </select>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="row gy-4">
+  <div class="col-lg-6">
+    <div class="portfolio-details-slider swiper-container">
+      <canvas id="mychart2"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="portfolio-info">
+      <h3 id="zzzz2">탭투다</h3>
+      <ul>
+        <!--<li><strong>Category</strong>: Web design</li>-->
+        <!--<li><strong>Client</strong>: ASU Company</li>-->
+        <!--<li><strong>Project date</strong>: 01 March, 2020</li>-->
+        <!--<li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>-->
+      </ul>
+    </div>
+    <div class="portfolio-description" id="portfolio-description">
+      <h2>This is an example of portfolio detail</h2>
+      <p>
+        <select id="selectIndicator" class="form-control">
+          {% for indicator in indicator_list %}
+          <option value="{{indicator.indicator_nm}}">
+            <log class="console">{{indicator.indicator_nm}}</log>
+          </option>
+          {% endfor %}
+        </select>
+        <select id="selectYear" class="form-control">
+          {% for objects in unityindicator_list %}
+          <option value="{objects.year}}">{{objects.year}}</option>
+          {% endfor %}
+        </select>
       </p>
     </div>
   </div>
@@ -78,55 +110,55 @@
     // });
   });
 
-  // $(document).ready(function () {
-  //   var color = [
-  //     "rgb(255, 99, 132)",
-  //     "rgb(255, 159, 64)",
-  //     "rgb(255, 205, 86)",
-  //     "rgb(75, 192, 192)",
-  //     "rgb(54, 162, 235)",
-  //     "rgb(153, 102, 255)",
-  //   ];
-  //   var data = {
-  //     labels: ["빨간색", "파란색", "초록색"],
-  //     datasets: [
-  //       {
-  //         label: "색상",
-  //         backgroundColor: color,
-  //         //borderColor: 'rgb(255, 99, 132)',
-  //         data: [2, 10, 5],
-  //       },
-  //     ],
-  //   };
+  $(document).ready(function () {
+    var color = [
+      "rgb(255, 99, 132)",
+      "rgb(255, 159, 64)",
+      "rgb(255, 205, 86)",
+      "rgb(75, 192, 192)",
+      "rgb(54, 162, 235)",
+      "rgb(153, 102, 255)",
+    ];
+    var data = {
+      labels: ["빨간색", "파란색", "초록색"],
+      datasets: [
+        {
+          label: "색상",
+          backgroundColor: color,
+          //borderColor: 'rgb(255, 99, 132)',
+          data: [2, 10, 5],
+        },
+      ],
+    };
 
-  //   makeChart.make("mychart2", "bar", data, "제목이다", false);
+    makeChart.make("mychart2", "line", data, "제목이다", false);
 
-  //   $("#selectIndicator").on("change", function () {
-  //     var selectYear = $("#selectYear").val();
-  //     if (selectYear == "") {
-  //       alert("년도를 선택해주세요.");
-  //       return false;
-  //     }
+    //   $("#selectIndicator").on("change", function () {
+    //     var selectYear = $("#selectYear").val();
+    //     if (selectYear == "") {
+    //       alert("년도를 선택해주세요.");
+    //       return false;
+    //     }
 
-  //     var parameter = { indicator: $(this).val() };
-  //     callFunc(
-  //       "/ajaxtest/",
-  //       parameter,
-  //       function (status, data) {
-  //         if (status == "success") {
-  //           var deptlist = data.result;
-  //           var datas = [];
-  //           for (var i = 0; i < deptlist.length; i++) {
-  //             datas.push(deptlist[i].dept_nm);
-  //             alert(deptlist[i].dept_nm);
-  //           }
-  //         } else {
-  //           alert("데이터 가져오기 실패");
-  //           returnData = null;
-  //         }
-  //       },
-  //       false
-  //     );
-  //   });
-  // });
+    //     var parameter = { indicator: $(this).val() };
+    //     callFunc(
+    //       "/ajaxtest/",
+    //       parameter,
+    //       function (status, data) {
+    //         if (status == "success") {
+    //           var deptlist = data.result;
+    //           var datas = [];
+    //           for (var i = 0; i < deptlist.length; i++) {
+    //             datas.push(deptlist[i].dept_nm);
+    //             alert(deptlist[i].dept_nm);
+    //           }
+    //         } else {
+    //           alert("데이터 가져오기 실패");
+    //           returnData = null;
+    //         }
+    //       },
+    //       false
+    //     );
+    //   });
+  });
 </script>

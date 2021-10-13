@@ -20,7 +20,6 @@ def tab_view(request):
         returnPage = 'project/project_1_tab1.html'
     else :
         returnPage = 'project/project_1_tab2.html'
-    # indicator_list = Indicator.objects.all()
     test_list = TUnityIndicator.objects.all()
     indicator_list = TIndicator.objects.all()
 
