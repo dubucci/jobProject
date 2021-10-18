@@ -117,3 +117,29 @@ class TbDept(models.Model):
     class Meta:
         managed = False
         db_table = 'tb_dept'
+
+class Vdetailindex(models.Model):
+    detail_indicator_seq = models.AutoField(primary_key=True)
+    gubun =  models.CharField(db_column='GUBUN', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    year = models.CharField(db_column='YEAR', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    detail_index = models.CharField(db_column='DETAIL_INDEX', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    code = models.CharField(db_column='CODE', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    code_nm = models.CharField(db_column='CODE_NM', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    indicator = models.CharField(db_column='INDICATOR', max_length=50)  # Field name made lowercase.
+    indicator_nm = models.CharField(db_column='INDICATOR_NM', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'v_detail_indicator_real'
+
+class Vunityindex(models.Model):
+    unity_indicator_seq = models.AutoField(primary_key=True)
+    gubun =  models.CharField(db_column='GUBUN', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    year = models.CharField(db_column='YEAR', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    unity_index = models.CharField(db_column='UNITY_INDEX', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    code = models.CharField(db_column='CODE', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    code_nm = models.CharField(db_column='CODE_NM', max_length=100, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'v_unity_indicator_real'

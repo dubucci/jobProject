@@ -17,16 +17,19 @@
     <div class="portfolio-description" id="portfolio-description">
       <h2>This is an example of portfolio detail</h2>
       <p>
-        <select id="selectIndicator" class="form-control">
+        <select id="selectYear1" class="form-control">
+          <option value="">년도를 선택해주세요</option>
+          {% for objects in year_list %}
+          <option value="{{objects.year}}">{{objects.year}}</option>
+          {% endfor %}
+        </select>
+        <select id="selectIndicator1" class="form-control">
+          <option value="">지수를 선택해주세요</option>
+          <option value="통합지수">통합지수</option>
           {% for indicator in indicator_list %}
           <option value="{{indicator.indicator_nm}}">
             <log class="console">{{indicator.indicator_nm}}</log>
           </option>
-          {% endfor %}
-        </select>
-        <select id="selectYear" class="form-control">
-          {% for objects in unityindicator_list %}
-          <option value="{objects.year}}">{{objects.year}}</option>
           {% endfor %}
         </select>
       </p>
@@ -52,24 +55,74 @@
     <div class="portfolio-description" id="portfolio-description">
       <h2>This is an example of portfolio detail</h2>
       <p>
-        <select id="selectIndicator" class="form-control">
+        <select id="selectRegion" class="form-control">
+          <option value="">지역을 선택해주세요</option>
+          {% for sido in sido_list %}
+          <option value="{sido.code_nm}}">{{sido.code_nm}}</option>
+          {% endfor %}
+        </select>
+        <select id="selectIndicator2" class="form-control">
+          <option value="">지수를 선택해주세요</option>
+          <option value="통합지수">통합지수</option>
           {% for indicator in indicator_list %}
           <option value="{{indicator.indicator_nm}}">
             <log class="console">{{indicator.indicator_nm}}</log>
           </option>
           {% endfor %}
         </select>
-        <select id="selectYear" class="form-control">
-          {% for objects in unityindicator_list %}
-          <option value="{objects.year}}">{{objects.year}}</option>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="row gy-4">
+  <div class="col-lg-6">
+    <div class="map" style="height: 1000px">{{ map|safe }}</div>
+  </div>
+  <div class="col-lg-6">
+    <div class="portfolio-info">
+      <h3 id="zzzz3">탭원이다</h3>
+      <ul>
+        <!--<li><strong>Category</strong>: Web design</li>-->
+        <!--<li><strong>Client</strong>: ASU Company</li>-->
+        <!--<li><strong>Project date</strong>: 01 March, 2020</li>-->
+        <!--<li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>-->
+      </ul>
+    </div>
+    <div class="portfolio-description" id="portfolio-description">
+      <!-- {% for i in test_list %}
+      <h2>{{i.code_nm}}</h2>
+      {% endfor %} -->
+      <p>
+        <select id="selectYear3" class="form-control">
+          <option value="">년도를 선택해주세요</option>
+          {% for objects in year_list %}
+          <option value="{{objects.year}}">{{objects.year}}</option>
+          {% endfor %}
+        </select>
+        <select id="selectIndicator3" class="form-control">
+          <option value="">지수를 선택해주세요</option>
+          <option value="통합지수">통합지수</option>
+          {% for indicator in indicator_list %}
+          <option value="{{indicator.indicator_nm}}">
+            <log class="console">{{indicator.indicator_nm}}</log>
+          </option>
           {% endfor %}
         </select>
       </p>
     </div>
   </div>
 </div>
+<input type="hidden" id="myVar" value="{{ test_list }}" />
 
 <script>
+  // var test_list = { test_list };
+  // var list = [];
+  // for (var i in test_list) {
+  //   var chart_data = list.append(i.unity_index);
+  // }
+
+  /// =============================================chart1=========================================================
+
   $(document).ready(function () {
     var color = [
       "rgb(255, 99, 132)",
@@ -78,20 +131,53 @@
       "rgb(75, 192, 192)",
       "rgb(54, 162, 235)",
       "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
+      "rgb(153, 102, 255)",
     ];
     var data = {
-      labels: ["빨간색", "파란색", "초록색"],
+      labels: [
+        "계",
+        "서울특별시",
+        "부산광역시",
+        "대구광역시",
+        "인천광역시",
+        "광주광역시",
+        "대전광역시",
+        "울산광역시",
+        "세종특별자치시",
+        "경기도",
+        "강원도",
+        "충청북도",
+        "충청남도",
+        "전라북도",
+        "전라남도",
+        "경상북도",
+        "경상남도",
+        "제주도",
+      ],
       datasets: [
         {
-          label: "색상",
+          label: "광역시/도",
           backgroundColor: color,
           //borderColor: 'rgb(255, 99, 132)',
-          data: [2, 10, 5],
+          data: [],
         },
       ],
     };
 
     makeChart.make("mychart", "bar", data, "제목이다", false);
+
+    // ===================================================================================
 
     // $("#zzzz").on("click", function () {
     //   callFunc(
@@ -101,64 +187,207 @@
     //       if (status == "success") {
     //         console.log(data);
     //       } else {
-    //         alert("데이터 가져오기 실패");
+    //         alert("데이터 가져오기 실패??");
     //         returnData = null;
     //       }
     //     },
     //     false
     //   );
     // });
-  });
 
+    $("#selectIndicator1").on("change", function () {
+      var selectYear1 = $("#selectYear1").val();
+      if (selectYear1 == "") {
+        alert("년도를 선택해주세요.");
+        return false;
+      }
+
+      // var parameter = { indicator: $(this).val() };
+      var selectIndicator1 = $("#selectIndicator1").val();
+      callFunc(
+        "/chartf/",
+        selectIndicator1,
+        function (status, data) {
+          if (status == "success") {
+            // var result_nm = format("test_{}_{}", selectYear1, selectIndicator1);
+            var datalist = data.test_2008_통합지수;
+            // var deptlist = data.test_2008_통합지수;
+            var labels = [];
+            var datas = [];
+            for (var i = 0; i < datalist.length; i++) {
+              datas.push(datalist[i].unity_index);
+              labels.push(datalist[i].code_nm);
+              // datas.push(deptlist[i].unity_index);
+              // labels.push(deptlist[i].code_nm);
+              // alert(datalist[i].code_nm);
+            }
+
+            // for (var i = 0; i < deptlist.length; i++) {
+            //   // datas.push(selectYear1);
+            //   datas.push(deptlist[i].unity_index);
+            //   // alert(datas[i]);
+            // }
+            // returnData = datas;
+            // returnData = labels;
+
+            var color = [
+              "rgb(255, 99, 132)",
+              "rgb(255, 159, 64)",
+              "rgb(255, 205, 86)",
+              "rgb(75, 192, 192)",
+              "rgb(54, 162, 235)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+              "rgb(153, 102, 255)",
+            ];
+            var data = {
+              labels: labels,
+              datasets: [
+                {
+                  label: "광역시/도",
+                  backgroundColor: color,
+                  //borderColor: 'rgb(255, 99, 132)',
+                  data: datas,
+                },
+              ],
+            };
+
+            makeChart.make("mychart", "bar", data, "제목이다", false);
+          } else {
+            alert("데이터 가져오기 실패???");
+            returnData = null;
+          }
+        },
+        false
+      );
+    });
+    var test = datas;
+  });
+  // });
+  /// =============================================chart2=========================================================
   $(document).ready(function () {
     var color = [
       "rgb(255, 99, 132)",
-      "rgb(255, 159, 64)",
-      "rgb(255, 205, 86)",
-      "rgb(75, 192, 192)",
-      "rgb(54, 162, 235)",
-      "rgb(153, 102, 255)",
+      // "rgb(255, 159, 64)",
+      // "rgb(255, 205, 86)",
+      // "rgb(75, 192, 192)",
+      // "rgb(54, 162, 235)",
+      // "rgb(153, 102, 255)",
+      // "rgb(153, 102, 255)",
+      // "rgb(153, 102, 255)",
+      // "rgb(153, 102, 255)",
+      // "rgb(153, 102, 255)",
+      // "rgb(153, 102, 255)",
+      // "rgb(153, 102, 255)",
     ];
     var data = {
-      labels: ["빨간색", "파란색", "초록색"],
+      labels: [
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+      ],
       datasets: [
         {
           label: "색상",
           backgroundColor: color,
-          //borderColor: 'rgb(255, 99, 132)',
-          data: [2, 10, 5],
+          borderColor: "rgb(255, 99, 132)",
+          data: [2, 10, 5, 5, 6, 5, 1, 2, 3, 4, 8, 9],
         },
       ],
     };
 
     makeChart.make("mychart2", "line", data, "제목이다", false);
 
-    //   $("#selectIndicator").on("change", function () {
-    //     var selectYear = $("#selectYear").val();
-    //     if (selectYear == "") {
-    //       alert("년도를 선택해주세요.");
-    //       return false;
-    //     }
+    // $("#zzzz2").on("click", function () {
+    //   callFunc(
+    //     "/ajaxtest/",
+    //     "",
+    //     function (status, data) {
+    //       if (status == "success") {
+    //         console.log(data);
+    //       } else {
+    //         alert("데이터 가져오기 실패??");
+    //         returnData = null;
+    //       }
+    //     },
+    //     false
+    //   );
+    // });
 
-    //     var parameter = { indicator: $(this).val() };
-    //     callFunc(
-    //       "/ajaxtest/",
-    //       parameter,
-    //       function (status, data) {
-    //         if (status == "success") {
-    //           var deptlist = data.result;
-    //           var datas = [];
-    //           for (var i = 0; i < deptlist.length; i++) {
-    //             datas.push(deptlist[i].dept_nm);
-    //             alert(deptlist[i].dept_nm);
-    //           }
-    //         } else {
-    //           alert("데이터 가져오기 실패");
-    //           returnData = null;
-    //         }
-    //       },
-    //       false
-    //     );
-    //   });
+    $("#selectIndicator2").on("change", function () {
+      var selectRegion = $("#selectRegion").val();
+      if (selectRegion == "") {
+        alert("지역을 선택해주세요.");
+        return false;
+      }
+
+      var parameter = { indicator: $(this).val() };
+      callFunc(
+        "/ajaxtest/",
+        parameter,
+        function (status, data) {
+          if (status == "success") {
+            var deptlist = data.result;
+            var datas = [];
+            for (var i = 0; i < deptlist.length; i++) {
+              datas.push(deptlist[i].dept_nm);
+              alert(deptlist[i].dept_nm);
+              // print(test_list[i]);
+            }
+          } else {
+            alert("데이터 가져오기 실패");
+            returnData = null;
+          }
+        },
+        false
+      );
+    });
+  });
+
+  $("#selectIndicator3").on("change", function () {
+    var selectYear3 = $("#selectYear3").val();
+    if (selectYear3 == "") {
+      alert("년도를 선택해주세요.");
+      return false;
+    }
+
+    var parameter = { indicator: $(this).val() };
+    callFunc(
+      "/ajaxtest/",
+      parameter,
+      function (status, data) {
+        if (status == "success") {
+          var deptlist = data.result;
+          var datas = [];
+          for (var i = 0; i < deptlist.length; i++) {
+            datas.push(deptlist[i].dept_nm);
+            alert(deptlist[i].dept_nm);
+          }
+        } else {
+          alert("데이터 가져오기 실패");
+          returnData = null;
+        }
+      },
+      false
+    );
   });
 </script>
