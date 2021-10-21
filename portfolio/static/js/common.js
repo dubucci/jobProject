@@ -3,13 +3,12 @@
 //data = 안의 데이터
 //chartTitle = 차트의 제목
 //chartTitleTF = 차트 제목 사용 true, false
+var chartComponent = new Object();
 var makeChart = {
   make: function (ele, chart, data, chartTitle, chartTitleTF) {
     ctx = document.getElementById(ele).getContext("2d");
 
-    // console.log("TEST");
-
-    new Chart(ctx, {
+    var config = {
       type: chart,
       data: data,
       options: {
@@ -27,8 +26,8 @@ var makeChart = {
           yAxes: [
             {
               ticks: {
-                //min : 0
-                //max : 20
+                //min : 0,
+                //max : 20,
                 beginAtZero: true,
                 fontSize: 14,
               },
@@ -36,10 +35,16 @@ var makeChart = {
           ],
         },
       },
-    });
+    };
+    if (chartComponent[ele] == null) {
+      chartComponent[ele] = new Chart(ctx, config);
+    } else {
+      chartComponent[ele].ctx = ctx;
+      chartComponent[ele].config = config;
+      chartComponent[ele].update();
+    }
   },
 };
-
 // var makeChart_h = {
 //   make: function (ele1, chart1, data1, chartTitle1, chartTitleTF1) {
 //     var ctx1 = document.getElementById(ele1).getContext("2d");

@@ -1,7 +1,9 @@
+{ % load static % }
+<script src="{% static 'js/common.js' %}"></script>
 <div class="row gy-4">
   <div class="col-lg-6">
     <div class="portfolio-details-slider swiper-container">
-      <canvas id="mychart"></canvas>
+      <canvas id="mychart3"></canvas>
     </div>
   </div>
   <div class="col-lg-6">
@@ -44,7 +46,7 @@
 <div class="row gy-4">
   <div class="col-lg-6">
     <div class="portfolio-details-slider swiper-container">
-      <canvas id="mychart2"></canvas>
+      <canvas id="mychart4"></canvas>
     </div>
   </div>
   <div class="col-lg-6">
@@ -140,7 +142,7 @@
       ],
     };
 
-    makeChart.make("mychart", "bar", data, "제목이다", false);
+    makeChart.make("mychart3", "bar", data, "제목이다", false);
 
     // $("#zzzz").on("click", function () {
     //   callFunc(
@@ -234,7 +236,7 @@
               ],
             };
 
-            makeChart.make("mychart", "bar", data, "제목이다", false);
+            makeChart.make("mychart3", "bar", data, "제목이다", false);
           } else {
             alert("데이터 가져오기 실패???");
             returnData = null;
@@ -274,7 +276,7 @@
       ],
     };
 
-    makeChart.make("mychart2", "line", data, "제목이다", false);
+    makeChart.make("mychart4", "line", data, "제목이다", false);
 
     // $("#zzzz2").on("click", function () {
     //   callFunc(
@@ -378,7 +380,7 @@
               ],
             };
 
-            makeChart.make("mychart2", "line", data, "제목이다", false);
+            makeChart.make("mychart4", "line", data, "제목이다", false);
           } else {
             alert("데이터 가져오기 실패???");
             returnData = null;
