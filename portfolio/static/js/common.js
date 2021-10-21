@@ -26,8 +26,8 @@ var makeChart = {
           yAxes: [
             {
               ticks: {
-                //min : 0,
-                //max : 20,
+                min: 0,
+                max: 100,
                 beginAtZero: true,
                 fontSize: 14,
               },

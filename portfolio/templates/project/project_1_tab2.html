@@ -1,30 +1,16 @@
-{ % load static % }
-<script src="{% static 'js/common.js' %}"></script>
 <div class="row gy-4">
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <div class="portfolio-details-slider swiper-container">
-      <canvas id="mychart3"></canvas>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="portfolio-info">
-      <h3 id="zzzz">연도별 산업별 일자리 지수</h3>
-      <ul>
-        <!--<li><strong>Category</strong>: Web design</li>-->
-        <!--<li><strong>Client</strong>: ASU Company</li>-->
-        <!--<li><strong>Project date</strong>: 01 March, 2020</li>-->
-        <!--<li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>-->
-      </ul>
-    </div>
-    <div class="portfolio-description" id="portfolio-description">
-      <h2>Select</h2>
-      <p>
+      <h3>연도별 산업별 일자리 지수</h3>
+      <div class="col-lg-6" style="float: left">
         <select id="selectYear1" class="form-control">
           <option value="">년도를 선택해주세요</option>
           {% for objects in year_list2 %}
           <option value="{{objects.year}}">{{objects.year}}</option>
           {% endfor %}
         </select>
+      </div>
+      <div class="col-lg-6" style="float: left">
         <select id="selectIndicator1" class="form-control">
           <option value="">지수를 선택해주세요</option>
           <option value="통합지수">통합지수</option>
@@ -39,35 +25,24 @@
           </option>
           {% endfor %} -->
         </select>
-      </p>
+      </div>
+      <canvas id="mychart3"></canvas>
     </div>
   </div>
 </div>
 <div class="row gy-4">
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <div class="portfolio-details-slider swiper-container">
-      <canvas id="mychart4"></canvas>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="portfolio-info">
-      <h3 id="zzzz2">산업별 시계열 일자리 지수</h3>
-      <ul>
-        <!--<li><strong>Category</strong>: Web design</li>-->
-        <!--<li><strong>Client</strong>: ASU Company</li>-->
-        <!--<li><strong>Project date</strong>: 01 March, 2020</li>-->
-        <!--<li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>-->
-      </ul>
-    </div>
-    <div class="portfolio-description" id="portfolio-description">
-      <h2>Select</h2>
-      <p>
+      <h3>산업별 시계열 일자리 지수</h3>
+      <div class="col-lg-6" style="float: left">
         <select id="selectIndustry" class="form-control">
           <option value="">산업분야를 선택해주세요</option>
           {% for indus in indus_list %}
           <option value="{{indus.code}}">{{indus.code_nm}}</option>
           {% endfor %}
         </select>
+      </div>
+      <div class="col-lg-6" style="float: left">
         <select id="selectIndicator2" class="form-control">
           <option value="">지수를 선택해주세요</option>
           <option value="통합지수">통합지수</option>
@@ -82,7 +57,8 @@
           </option>
           {% endfor %} -->
         </select>
-      </p>
+      </div>
+      <canvas id="mychart4"></canvas>
     </div>
   </div>
 </div>
@@ -90,25 +66,28 @@
   //===================chart1==========================================================
   $(document).ready(function () {
     var color = [
-      "rgb(255, 99, 132)",
-      "rgb(255, 159, 64)",
-      "rgb(255, 205, 86)",
-      "rgb(75, 192, 192)",
-      "rgb(54, 162, 235)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
-      "rgb(153, 102, 255)",
+      "#98a1a8",
+      "#5aa7de",
+      "#929ae9",
+      "#b48ee8",
+      "#dc7be5",
+      "#e57dba",
+      "#e6838b",
+      "#dd8d54",
+      "#b0a200",
+      "#94d736",
+      "#0fb900",
+      "#00b84d",
+      "#00b3a4",
+      "#dee1e3",
+      "#cce4f5",
+      "#bcc0f2",
+      "#d1baf1",
+      "#eab0ef",
+      "#f0b2d6",
+      "#f0b5ba",
+      "#eaba98",
+      "#d5c72c",
     ];
     var data = {
       labels: [
@@ -143,22 +122,6 @@
     };
 
     makeChart.make("mychart3", "bar", data, "제목이다", false);
-
-    // $("#zzzz").on("click", function () {
-    //   callFunc(
-    //     "/ajaxtest/",
-    //     "",
-    //     function (status, data) {
-    //       if (status == "success") {
-    //         console.log(data);
-    //       } else {
-    //         alert("데이터 가져오기 실패??");
-    //         returnData = null;
-    //       }
-    //     },
-    //     false
-    //   );
-    // });
 
     $("#selectIndicator1").on("change", function () {
       var selectYear1 = $("#selectYear1").val();
@@ -204,25 +167,28 @@
             // returnData = labels;
 
             var color = [
-              "rgb(255, 99, 132)",
-              "rgb(255, 159, 64)",
-              "rgb(255, 205, 86)",
-              "rgb(75, 192, 192)",
-              "rgb(54, 162, 235)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
-              "rgb(153, 102, 255)",
+              "#98a1a8",
+              "#5aa7de",
+              "#929ae9",
+              "#b48ee8",
+              "#dc7be5",
+              "#e57dba",
+              "#e6838b",
+              "#dd8d54",
+              "#b0a200",
+              "#94d736",
+              "#0fb900",
+              "#00b84d",
+              "#00b3a4",
+              "#dee1e3",
+              "#cce4f5",
+              "#bcc0f2",
+              "#d1baf1",
+              "#eab0ef",
+              "#f0b2d6",
+              "#f0b5ba",
+              "#eaba98",
+              "#d5c72c",
             ];
             var data = {
               labels: labels,
@@ -277,22 +243,6 @@
     };
 
     makeChart.make("mychart4", "line", data, "제목이다", false);
-
-    // $("#zzzz2").on("click", function () {
-    //   callFunc(
-    //     "/ajaxtest/",
-    //     "",
-    //     function (status, data) {
-    //       if (status == "success") {
-    //         console.log(data);
-    //       } else {
-    //         alert("데이터 가져오기 실패??");
-    //         returnData = null;
-    //       }
-    //     },
-    //     false
-    //   );
-    // });
 
     //   $("#selectIndicator2").on("change", function () {
     //     var selectRegion = $("#selectRegion").val();

@@ -14,12 +14,11 @@ def main(request):
 
 def project_1(request):
 
-    dept_list = TbDept.objects.all()
-
-    return render(request, 'project/project_1.html', {'dept_list' : dept_list})
+    return render(request, 'project/project_1.html')
 
 def tab_view(request):
     num = request.GET['num']
+    
     returnPage = ''
     if num == '0' :
         returnPage = 'project/project_1_tab1.html'
@@ -141,6 +140,18 @@ def charts(request):
     resultJson = {'chart2uni':chart2uni, 'chart2det':chart2det}
     return JsonResponse(resultJson, content_type="application/json")
 
+def chartm(request):
+    uni = Vunityindex.objects.all()
+    det = Vdetailindex.objects.all()
+
+    year3 = request.GET.get('param_year3')
+    indicator3 = request.GET.get('param_indicator3')
+    chart3uni = list(uni.filter(gubun = 'C', year = year3).values())
+    chart3det = list(det.filter(gubun = 'C', year = year3, indicator= indicator3).values())
+    
+    resultJson = {'chart3uni':chart3uni, 'chart3det':chart3det}
+    return JsonResponse(resultJson, content_type="application/json")
+
 def chartff(request):
     uni = Vunityindex.objects.all()
     det = Vdetailindex.objects.all()
@@ -164,8 +175,3 @@ def chartss(request):
 
     resultJson = {'chart22uni':chart22uni, 'chart22det':chart22det}
     return JsonResponse(resultJson, content_type="application/json")
-
-# def test(request):
-#     return(request.POST.get('param_year'))
-
-# print(test)

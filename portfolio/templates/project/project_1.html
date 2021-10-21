@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<script src="{% static 'js/common.js' %}"></script>
 <main id="main">
   <!-- ======= Breadcrumbs ======= -->
   <section id="breadcrumbs" class="breadcrumbs">
@@ -27,10 +28,6 @@
   <!-- End Portfolio Details Section -->
 </main>
 <!-- End #main -->
-<!-- 
-  {% for dept in dept_list %}
-    {{dept.dept_nm}}
-  {% endfor %} -->
 <script>
   $(document).ready(function () {
     callFuncView("/tab_view/", { num: "0" }, function (status, data) {
@@ -54,7 +51,7 @@
         if (status == "success") {
           $("#serviceArea").html(data);
         } else {
-          alert("데이터 가져오기 실패");
+          alert("데이터 가져오기 실패???");
           returnData = null;
         }
       });
