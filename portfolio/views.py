@@ -83,40 +83,6 @@ def ajaxtest(request):
     return JsonResponse(resultJson, content_type="application/json")
 
 def chartf(request):
-    
-    # tcode_list = TCode.objects.all()
-    
-    # join_list = list(TUnityIndicator.objects.raw('''select ui.CODE, ui.GUBUN, ui.YEAR, ui.UNITY_INDEX, c.CODE, c.CODE_NM
-    #                                                 from t_unity_indicator as ui                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-    #                                                 join t_code as c
-    #                                                 on c.CODE = ui.CODE and c.GROUP_CODE = ui.GUBUN        
-    #                                                 where ui.GUBUN = 'C' and ui.YEAR = '2008';'''    
-    #                                                 ))
-    # join_list = TUnityIndicator.objects.extra(tables=['TCode'], where = ['TCode.code = TUnityIndicator.code','TCode.group_code = TUnityIndicator.gubun'])
-    # test_list = list(join_list.filter(gubun = 'C', year = 2008).values())
-
-    # uni = Vunityindex.objects.all()
-    # det = Vdetailindex.objects.all()
-
-    # testuni = list(uni1.filter(gubun = 'C', year = 2008).values())
-    # testdet = list(det1.filter(gubun = 'C', year = 2008, indicator_nm = '고용기회').values())
-    
-    # testuni = list(uni1.filter(gubun = 'C', year = request.POST.get('param_year')).values())
-    # year = request.GET.get('param_year1')
-    # indicator = request.GET.get('param_indicator1')
-    # testuni = list(uni1.filter(gubun = 'C', year = '2008').values())
-    # testuni = list(uni.filter(gubun = 'C', year = year).values())
-    # testdet = list(det.filter(gubun = 'C', year = year, indicator= indicator).values())
-    # testdet = list(det1.filter(gubun = 'C', year = 2013, indicator= 17).values())
-    # test_2008_통합지수= list(uni1.filter(gubun = 'C', year = 2008).values())
-    # test_2008_고용기회= list(det1.filter(gubun = 'C', year = 2008, indicator_nm = '고용기회').values())
-    # test_2009_고용기회= list(det1.filter(gubun = 'C', year = 2009, indicator_nm = '고용기회').values())
-    
-    # for i in range(2008,2020):
-    #     'list_'f'{i}'+'_uni' = list(unityindicator_list.filter(gubun = 'C', year = f'{i}').values())
-    
-    # detailindicator_list = TDetailIndicator.objects.all()
-
     uni = Vunityindex.objects.all()
     det = Vdetailindex.objects.all()
 

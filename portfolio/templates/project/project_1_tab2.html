@@ -1,5 +1,5 @@
 <div class="row gy-4">
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div class="portfolio-details-slider swiper-container">
       <h3>연도별 산업별 일자리 지수</h3>
       <div class="col-lg-6" style="float: left">
@@ -29,9 +29,21 @@
       <canvas id="mychart3"></canvas>
     </div>
   </div>
+  <div class="col-lg-4">
+    <table class="table table_3rem">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>지수</th>
+        </tr>
+      </thead>
+      <tbody id="mychart_tb3"></tbody>
+    </table>
+  </div>
 </div>
+
 <div class="row gy-4">
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div class="portfolio-details-slider swiper-container">
       <h3>산업별 시계열 일자리 지수</h3>
       <div class="col-lg-6" style="float: left">
@@ -61,7 +73,19 @@
       <canvas id="mychart4"></canvas>
     </div>
   </div>
+  <div class="col-lg-4">
+    <table class="table table_3rem">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>지수</th>
+        </tr>
+      </thead>
+      <tbody id="mychart_tb4"></tbody>
+    </table>
+  </div>
 </div>
+
 <script>
   //===================chart1==========================================================
   $(document).ready(function () {
@@ -149,6 +173,7 @@
 
             var labels = [];
             var datas = [];
+            var tempHtml3 = "";
             for (var i = 0; i < datalist.length; i++) {
               datas.push(datalist[i].detail_index);
               labels.push(datalist[i].code_nm.substring(0, 10));
@@ -156,8 +181,14 @@
               // labels.push(deptlist[i].code_nm);
               // alert(datalist[i].code_nm);
               // alert(selectIndicator1);
+              tempHtml3 +=
+                "<tr><td>" +
+                datalist[i].code_nm +
+                "</td><td>" +
+                datalist[i].detail_index +
+                "</td></tr>";
             }
-
+            $("#mychart_tb3").html(tempHtml3);
             // for (var i = 0; i < deptlist.length; i++) {
             //   // datas.push(selectYear1);
             //   datas.push(deptlist[i].unity_index);
@@ -300,6 +331,7 @@
 
             var labels2 = [];
             var datas2 = [];
+            var tempHtml4 = "";
             for (var i = 0; i < datalist.length; i++) {
               datas2.push(datalist[i].detail_index);
               labels2.push(datalist[i].year);
@@ -307,8 +339,14 @@
               // labels.push(deptlist[i].code_nm);
               // alert(datalist[i].code_nm);
               // alert(selectIndicator1);
+              tempHtml4 +=
+                "<tr><td>" +
+                datalist[i].year +
+                "</td><td>" +
+                datalist[i].detail_index +
+                "</td></tr>";
             }
-
+            $("#mychart_tb4").html(tempHtml4);
             // for (var i = 0; i < deptlist.length; i++) {
             //   // datas.push(selectYear1);
             //   datas.push(deptlist[i].unity_index);

@@ -1,5 +1,15 @@
 {% load static %}
+<!-- 탭1, 2 호출할때마다 js load 되도록 -->
 <script src="{% static 'js/common.js' %}"></script>
+
+<style>
+  #d3_map {
+      position: relative;
+      width: 100%;
+      height: 100%;
+  }
+</style>
+
 <div class="row gy-4">
   <div class="col-lg-8">
     <div class="portfolio-details-slider swiper-container">
@@ -31,7 +41,7 @@
       <thead>
         <tr>
           <th>구분</th>
-          <th>값(명칭지정)</th>
+          <th>지수</th>
         </tr>
       </thead>
       <tbody id="mychart_tb">
@@ -42,7 +52,7 @@
 </div>
 
 <div class="row gy-4">
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div class="portfolio-details-slider swiper-container">
       <h3>지역별 시계열 일자리 지수</h3>
       <div class="col-lg-6" style="float: left">
@@ -66,6 +76,19 @@
       </div>
       <canvas id="mychart2"></canvas>
     </div>
+  </div>
+  <div class="col-lg-4">
+    <table class="table table_3rem">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>지수</th>
+        </tr>
+      </thead>
+      <tbody id="mychart_tb2">
+
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -91,6 +114,9 @@
           </option>
           {% endfor %}
         </select>
+      </div>
+      <div class="col-lg-12" style="margin-top: 20px; height: 600px;">
+        <div class="folium-map" id="d3_map"></div>
       </div>
       <!-- <div class="map" style="height: 1000px">{{ map|safe }}</div> -->
     </div>
@@ -361,32 +387,20 @@
         parameter,
         function (status, data) {
           if (status == "success") {
-            // var result_nm = format("test_{}_{}", selectYear1, selectIndicator1);
             if ($("#selectIndicator2").val() == "통합지수") {
               var datalist = data.chart2uni;
             } else {
               var datalist = data.chart2det;
             }
-
             var labels2 = [];
             var datas2 = [];
+            var tempHtml1 = '';
             for (var i = 0; i < datalist.length; i++) {
               datas2.push(datalist[i].detail_index);
               labels2.push(datalist[i].year);
-              // datas.push(deptlist[i].unity_index);
-              // labels.push(deptlist[i].code_nm);
-              // alert(datalist[i].code_nm);
-              // alert(selectIndicator1);
+              tempHtml1 += '<tr><td>'+datalist[i].year+'</td><td>'+datalist[i].detail_index+'</td></tr>';
             }
-
-            // for (var i = 0; i < deptlist.length; i++) {
-            //   // datas.push(selectYear1);
-            //   datas.push(deptlist[i].unity_index);
-            //   // alert(datas[i]);
-            // }
-            // returnData = datas;
-            // returnData = labels;
-
+            $('#mychart_tb2').html(tempHtml1);
             var color = ["rgb(54, 162, 235)"];
             var data = {
               labels: labels2,
@@ -399,10 +413,9 @@
                 },
               ],
             };
-
-            makeChart.make("mychart2", "line", data, "제목이다", false);
+            makeChart.make("mychart2", "line", data, "제목", false);
           } else {
-            alert("데이터 가져오기 실패???");
+            alert("데이터 가져오기 실패");
             returnData = null;
           }
         },
@@ -413,7 +426,32 @@
   });
   // });
 
-  //=====================chart3=======================================================================
+//=====================chart3=======================================================================
+$(document).ready(function(){
+    var mapOption = {
+      center: [36.45, 127.42],
+      zoom: 7,
+      zoomControl: true,
+      preferCanvas: false,
+    }
+    var d3_map = L.map("d3_map",mapOption);
+    
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        "attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.",
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+      }
+    ).addTo(d3_map);
+
+  var d3_map_option = '';
+
   $("#selectIndicator3").on("change", function () {
       var selectYear3 = $("#selectYear3").val();
       if (selectYear3 == "") {
@@ -427,32 +465,67 @@
       };
       // console.log(parameter.param_year);
       // var parameter = { indicator: $(this).val() };
+      
       callFunc(
         "/chartm/",
         parameter,
         function (status, data) {
           if (status == "success") {
-            // var result_nm = format("test_{}_{}", selectYear1, selectIndicator1);
             if ($("#selectIndicator3").val() == "통합지수") {
               var datalist = data.chart3uni;
             } else {
               var datalist = data.chart3det;
             }
+            console.log(d3_map_option);
+            if(d3_map_option != '') {
+              d3_map.removeLayer(d3_map_option);
+            }
+            
+            var choropleth = L.featureGroup({}).addTo(d3_map);
 
-            var labels3 = [];
-            var datas3 = [];
-            for (var i = 0; i < datalist.length; i++) {
-              datas3.push(datalist[i].detail_index);
-              labels3.push(datalist[i].code);
-              // datas.push(deptlist[i].unity_index);
-              // labels.push(deptlist[i].code_nm);
-              // alert(selectIndicator1);
-              alert(datalist[i].code);
+            
+            d3_map_option = L.geoJson(null, {
+              onEachFeature: d3_map_option_onEachFeature,
+              style: d3_map_option_styler
+            });
+
+            //json파일 load
+            var jsonData = JSON.parse(JSON.stringify(v_geoJson));
+            d3_map_option_add(jsonData);
+            
+            function d3_map_option_onEachFeature(feature, layer) {
+              layer.on({
+                click: function(e) {
+                  d3_map.fitBounds(e.target.getBounds());
+                }
+              });
+            };
+
+            function d3_map_option_add(data) {
+              d3_map_option.addData(data).addTo(choropleth);
+            }
+
+            function d3_map_option_styler(feature, layer) {
+              //console.log(datalist);
+              //console.log(feature);
+              
+              var propCity = feature.properties.CTP_KOR_NM;
+              var optStlye = {"color": "black", "fillColor": "#ff0000", "fillOpacity": 0, "opacity": 1, "weight": 1};
+              for (var i = 0; i < datalist.length; i++) {
+                if(propCity == datalist[i].code_nm) {
+                  var valFillOpacity = datalist[i].detail_index;
+                  if(valFillOpacity > 1) {
+                    valFillOpacity = valFillOpacity/100;
+                  }
+
+                  optStlye.fillOpacity = valFillOpacity;
+                }
+              }
+
+              return optStlye;
             }
             // 돈희 멘토님 labels에 지역코드, datas에 지수값 넣어놨어요...
             // 선물 정말 감사합니다...ㅎㅎ
-
-
           } else {
             alert("데이터 가져오기 실패???");
             returnData = null;
@@ -461,5 +534,6 @@
         false
       );
     });
+  })
 </script>
 
